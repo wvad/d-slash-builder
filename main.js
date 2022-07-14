@@ -33,10 +33,10 @@
 
   // Constants
   const OPTION_TYPE = freeze(
-    [
-      /*NONE*/ null,
-      /*"Sub command"*/ null,
-      /*"Sub command group"*/ null,
+    [ // eslint-disable-line no-sparse-arrays
+      /*NONE*/,
+      /*"Sub command"*/,
+      /*"Sub command group"*/,
       'String',
       'Integer',
       'Boolean',
