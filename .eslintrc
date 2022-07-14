@@ -1,0 +1,27 @@
+{
+  "extends": ["windward"],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "script"
+  },
+  "overrides": [
+    {
+      "files": ["index.js"],
+      "env": {
+        "node": true,
+        "commonjs": true,
+        "es2021": true
+      },
+      "globals": {
+        "fetch": "readonly"
+      }
+    },
+    {
+      "files": ["main.js"],
+      "env": {
+        "browser": true,
+        "es2021": true
+      }
+    }
+  ]
+}

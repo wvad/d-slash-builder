@@ -3,8 +3,15 @@
   "version": "0.1.0",
   "description": "",
   "main": "index.js",
-  "dependencies": {
+  "scripts": {
+    "lint": "eslint index.js main.js",
+    "format": "prettier --write index.html index.css index.js main.js"
+  },
+  "devDependencies": {
     "csso": "^5.0.4",
+    "eslint": "^8.19.0",
+    "eslint-config-windward": "^0.1.22",
+    "prettier": "^2.7.1",
     "uglify-js": "^3.16.2"
   }
 }
