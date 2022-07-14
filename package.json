@@ -1,0 +1,10 @@
+{
+  "name": "d-cmd-builder",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "csso": "^5.0.4",
+    "uglify-js": "^3.16.2"
+  }
+}

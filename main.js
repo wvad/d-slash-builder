@@ -1,1 +1,608 @@
-"use strict";(()=>{function e(e,t){return-1===t?`"${e}"`:-2===t?`\`${e}\``:`'${e}'`}function t(e){return e=e.charCodeAt(),n.length>e?n[e]:"\\u"+e.toString(16)}const n="\\x00 \\x01 \\x02 \\x03 \\x04 \\x05 \\x06 \\x07 \\b \\t \\n \\x0B \\f \\r \\x0E \\x0F \\x10 \\x11 \\x12 \\x13 \\x14 \\x15 \\x16 \\x17 \\x18 \\x19 \\x1A \\x1B \\x1C \\x1D \\x1E \\x1F \\' \\\\ \\x7F \\x80 \\x81 \\x82 \\x83 \\x84 \\x85 \\x86 \\x87 \\x88 \\x89 \\x8A \\x8B \\x8C \\x8D \\x8E \\x8F \\x90 \\x91 \\x92 \\x93 \\x94 \\x95 \\x96 \\x97 \\x98 \\x99 \\x9A \\x9B \\x9C \\x9D \\x9E \\x9F".split(" "),{MIN_SAFE_INTEGER:r,MAX_SAFE_INTEGER:i,EPSILON:o}=Number,{abs:s,trunc:a}=Math,l=JSON.stringify,{freeze:u,assign:d}=Object,p=document.createElement.bind(document),c=document.getElementById.bind(document),h=Function.prototype.call.bind(Element.prototype.append),x=(({call:e})=>{const t=e.bind(""[Symbol.iterator]),n=e.bind(t("").next);return e=>{e=t(e);for(let t=0;;t++)if(n(e).done)return t}})(Function.prototype),v=(m=new TextEncoder,g=m.encode.bind(m),e=>g(e).length);var g,m,f,y,b,w,E,C,N,O;const k=u([,,,"String","Integer","Boolean","User","Channel","Role","Mentionable","Number","Attachment"].map(((e,t)=>[e,t]))),M=u({errorMessage:u({color:"#FFA700"}),commandOption:u({padding:"7px",paddingTop:"0px",border:"1px #222 solid",borderRadius:"5px",margin:"5px 0px",position:"relative"}),optionChoice:u({display:"felx",padding:"5px 7px",border:"1px #222 solid",borderRadius:"5px",margin:"5px 0px",position:"relative"}),checkbox:u({width:"24px",height:"24px",outline:"0",cursor:"pointer"}),checkboxDescription:u({marginLeft:".3em","user-select":"none","-moz-user-select":"none","-ms-user-select":"none","-khtml-user-select":"none","-webkit-user-select":"none","-webkit-touch-callout":"none"})});f=new WeakMap;const L=(u((m=class{constructor(){f.set(this,new Map)}on(e,t){const n=f.get(this),r=n.get(e);r?r.push(t):n.set(e,[t])}emit(e,...t){f.get(this).get(e)?.forEach((e=>e(...t)))}}).prototype),y=new WeakMap,class{constructor({title:e,parent:t}){if(new.target!==L)throw Error("new.target is invalid");const n={},r=(y.set(this,n),p("input")),i=(r.type="text",p("div"));h(t,i),t=p("h3"),i.append(t),t.textContent=e,i.append(n.input=r),i.append(n.errorMessage=p("div")),d(n.errorMessage.style,M.errorMessage)}get value(){return y.get(this).input.value}set value(e){y.get(this).input.value=e}on(...e){return y.get(this).input.addEventListener(...e)}showError(e){const t=y.get(this);t.input.style.borderColor="red",t.errorMessage.style.display="",t.errorMessage.textContent=e}hideError(){const e=y.get(this);e.input.style.borderColor="",e.errorMessage.style.display="none"}}),T=(u(L.prototype),b=new WeakMap,class{constructor({title:e,options:t,parent:n}){if(new.target!==T)throw Error("new.target is invalid");const r=p("select");b.set(this,r),t.forEach((e=>{const t=p("option");[t.textContent,t.value]=e,r.append(t)})),r.style.cursor="pointer",t=p("div"),h(n,t),n=p("h3"),t.append(n),n.textContent=e,t.append(r)}get value(){return b.get(this).value}set value(e){b.get(this).value=e}on(...e){return b.get(this).addEventListener(...e)}}),A=(u(T.prototype),w=new WeakMap,class{constructor({title:e,description:t,parent:n}){if(new.target!==A)throw Error("new.target is invalid");var r=p("div");h(n,r),n=p("h3"),r.append(n),n.textContent=e,e=p("div");const i=(r.append(e),p("input"));w.set(this,i),e.append(i),e.style.cursor="pointer",e.addEventListener("click",(e=>{e.target!==i&&i.click()})),i.type="checkbox",d(i.style,M.checkbox),(r=p("span")).textContent=t,d(r.style,M.checkboxDescription),e.append(r)}get value(){return w.get(this).checked}set value(e){w.get(this).checked=e}on(...e){return w.get(this).addEventListener(...e)}}),S=(u(A.prototype),E=new WeakMap,class{constructor({parent:e}){if(new.target!==S)throw Error("new.target is invalid");const t={},n=(E.set(this,t),p("div"));var r=p("div"),i={flex:"1",padding:"2px"};Object.assign(r.style,i),n.append(r);const o=p("h3");o.textContent="Name",o.style.margin="2px 0px",r.append(o),r.append(t.name=p("input")),t.name.type="text",r=p("div"),Object.assign(r.style,i),n.append(r),(i=p("h3")).textContent="Value",i.style.margin="2px 0px",r.append(i),r.append(t.value=p("input")),t.value.type="text",Object.assign(n.style,M.optionChoice),h(e,n)}get name(){return E.get(this).name.value}set name(e){E.get(this).name.value=e}get value(){return E.get(this).value.value}set value(e){E.get(this).value.value=e}}),q=(u(S.prototype),C=new WeakMap,class extends m{constructor({parent:e}){function t(){return 1>m.value.length?m.showError("This is required"):32<m.value.length?m.showError("Too long"):/^[\w-]{1,32}$/.test(m.value)?void m.hideError():m.showError("Only alphabet, number, hyphen and underbar")}function n(){var e=x(f.value);return 1>e?f.showError("This is required"):100<e?f.showError("Too long"):void f.hideError()}function l(e){let t="";e.on("input",(()=>{if(!e.value)return t=e.value,void this.emit("changed");var n=Number(g.value);if([4,10].includes(n)){var l=4===n;if(l?"-"===e.value:/^(-|\.|-\.)$/.test(e.value))return t=e.value,void this.emit("changed");var u,d=e.value.endsWith(".");switch(n=e.value,u=Number(n),Number.isNaN(u)?"INVALID":u<r?"SMALL":i<u?"BIG":l&&o<s(a(u)-u)||l&&!/^-?\d+$/.test(n)?"TRUNC":"OK"){case"INVALID":return void(e.value=t);case"SMALL":e.value=r;break;case"BIG":e.value=i;break;case"TRUNC":e.value=a(e.value),d&&!l&&(e.value+=".");break;case"OK":break;default:throw Error("Invalid case")}t=e.value,this.emit("changed")}else e.value=t}))}if(new.target!==q)throw Error("new.target is invalid");super();const c={},v=(C.set(this,c),c.container=p("div"));h(e,v),d(v.style,M.commandOption),this.type=new T({title:"Type",options:k,parent:v}),this.name=new L({title:"Name",parent:v}),this.description=new L({title:"Description",parent:v}),this.required=new A({title:"Required",description:"This command option is required",parent:v}),v.append(c.autocomplete=p("div")),this.autocomplete=new T({title:"Auto complete or Choices",options:[["OFF","false"],["ON - Auto complete","true"]],parent:c.autocomplete}),v.append(c.numOpt=p("div")),c.numOpt.style.display="none",this.minValue=new L({title:"Min value (optional)",parent:c.numOpt}),this.maxValue=new L({title:"Max value (optional)",parent:c.numOpt}),c.choices={},c.channelTypes=p("input"),e=p("div");const{type:g,name:m,description:f,minValue:y,maxValue:b}=(e.innerHTML="&times;",e.className="red-button",v.append(e),e.addEventListener("click",(()=>this.emit("deletionRequested"))),this);g.on("input",(()=>{var e=Number(g.value);this.numberRangeDisabled=![4,10].includes(e),this.autocompleteDisabled=![3,4,10].includes(e),this.emit("changed")})),m.on("blur",t),m.on("input",(()=>{t(),this.emit("changed")})),f.on("blur",n),f.on("input",(()=>{n(),this.emit("changed")})),l(y),l(b),this.required.on("input",(()=>{this.emit("changed")})),this.autocomplete.on("input",(()=>{this.emit("changed")})),u(this)}get numberRangeDisabled(){return"none"===C.get(this).numOpt.style.display}set numberRangeDisabled(e){C.get(this).numOpt.style.display=e?"none":""}get autocompleteDisabled(){return"none"===C.get(this).autocomplete.style.display}set autocompleteDisabled(e){C.get(this).autocomplete.style.display=e?"none":""}deleteSelf(){const e=C.get(this).container;e.parentNode?.removeChild(e),C.delete(this)}toJSON(){var e=Number(this.type.value);const t=[4,10].includes(e);var n=[3,4,10].includes(e);return{type:e,name:this.name.value,description:this.description.value,required:this.required.value||void 0,min_value:(()=>{if(t&&this.minValue.value){var e=Number(this.minValue.value);if(!Number.isNaN(e))return e}})(),max_value:(()=>{if(t&&this.maxValue.value){var e=Number(this.maxValue.value);if(!Number.isNaN(e))return e}})(),autocomplete:n&&"true"===this.autocomplete.value||void 0}}}),I=(u(q.prototype),N=new WeakMap,class extends m{constructor({parent:e}){super();const t=[],n=(N.set(this,t),p("div")),r=p("div"),i=p("span");i.textContent="Add command option",i.className="add-option",n.append(r),n.append(i),h(e,n),i.addEventListener("click",(()=>{const e=new q({parent:r}),n=e.required;t.push(e),n.on("input",(()=>{var r=t.indexOf(e);~r&&(n.value?t.slice(0,r).forEach((e=>e.required.value=!0)):t.slice(r+1).forEach((e=>e.required.value=!1))),this.emit("changed")})),e.on("deletionRequested",(()=>{var n=t.indexOf(e);~n&&t.splice(n,1),e.deleteSelf(),10>t.length&&(i.style.display=""),this.emit("changed")})),e.on("changed",(()=>this.emit("changed"))),9<t.length&&(i.style.display="none"),this.emit("changed")}))}at(e){return N.get(this).at(e)}get length(){return N.get(this).length}*[Symbol.iterator](){for(const e of N.get(this))yield e}toJSON(){const e=N.get(this);if(e.length)return e.map((e=>e?.toJSON?.()))}});u(I.prototype),Object.defineProperty(I,Symbol.species,{value:Array});const D=c("name"),F=c("description"),R=(O=c("out"),()=>{var r={name:D.value,description:F.value,options:j};r=l(r);var i=`const clientId = '', token = '';\n\nrequire('node:https').request(\`https://discord.com/api/applications/\${clientId}/commands\`,{method:'POST',headers:{'Content-Type':'application/json',Authorization:token,'Content-Length':${v(r)}}},`;{var o=/[\x00-\x1f\x27\x5c\x7f-\x9f]|[\ud800-\udbff](?![\udc00-\udfff])|(?<![\ud800-\udbff])[\udc00-\udfff]/,s=/[\x00-\x1f\x27\x5c\x7f-\x9f]|[\ud800-\udbff](?![\udc00-\udfff])|(?<![\ud800-\udbff])[\udc00-\udfff]/g;let i=39;if(r.includes("'")&&(r.includes('"')?r.includes("`")||r.includes("${")||(i=-2):i=-1,39!==i&&(o=/[\x00-\x1f\x5c\x7f-\x9f]|[\ud800-\udbff](?![\udc00-\udfff])|(?<![\ud800-\udbff])[\udc00-\udfff]/,s=/[\x00-\x1f\x5c\x7f-\x9f]|[\ud800-\udbff](?![\udc00-\udfff])|(?<![\ud800-\udbff])[\udc00-\udfff]/g)),5e3>r.length&&!o.test(r))r=e(r,i);else if(100<r.length)r=e(r.replace(s,t),i);else{o="",s=0;for(let e=0;e<r.length;e++){const t=r.charCodeAt(e);if(t===i||92===t||32>t||126<t&&160>t)o+=s===e?n[t]:""+r.slice(s,e)+n[t],s=e+1;else if(55296<=t&&57343>=t){if(56319>=t&&e+1<r.length){var a=r.charCodeAt(e+1);if(56320<=a&&57343>=a){e++;continue}}o+=r.slice(s,e)+"\\u"+t.toString(16),s=e+1}}s!==r.length&&(o+=r.slice(s)),r=e(o,i)}}return O.textContent=i+`r=>console.log('status:',r.statusCode)).end(${r})`});document.addEventListener("click",(()=>{}));const V=c("name-error");function $(){return R(),1>D.value.length?(D.style.borderColor="red",V.style.display="",V.textContent="This is required"):32<D.value.length?(D.style.borderColor="red",V.style.display="",V.textContent="Too long"):/^[\w-]{1,32}$/.test(D.value)?(V.style.display="none",D.style.borderColor=""):(D.style.borderColor="red",V.style.display="",V.textContent="Only alphabet, number, hyphen and underbar")}D.addEventListener("blur",$),D.addEventListener("input",$);const B=c("description-error");function W(){var e=x(F.value);return R(),1>e?(F.style.borderColor="red",B.style.display="",B.textContent="This is required"):100<e?(F.style.borderColor="red",B.style.display="",B.textContent="Too long"):(B.style.display="none",F.style.borderColor="")}F.addEventListener("blur",W),F.addEventListener("input",W);const j=globalThis.commandJSONOptions=new I({parent:c("options")});j.on("changed",R),R()})()
+(() => {
+  // Static Functions
+  const { MIN_SAFE_INTEGER, MAX_SAFE_INTEGER, EPSILON } = Number;
+  const { abs, trunc } = Math;
+  const { stringify } = JSON;
+  const { freeze, assign } = Object;
+  const createElement = document.createElement.bind(document);
+  const getElementById = document.getElementById.bind(document);
+  const appendElement = Function.prototype.call.bind(Element.prototype.append);
+  const countString = (({ call }) => {
+    const getStrItr = call.bind(""[Symbol.iterator]);
+    const next = call.bind(getStrItr("").next);
+    return str => {
+      str = getStrItr(str);
+      for (let n = 0;; n++) if (next(str).done) return n;
+    };
+  })(Function.prototype);
+  const byteLength = (encode => str => encode(str).length)((encoder => encoder.encode.bind(encoder))(new TextEncoder()));
+  function toJS(json) {
+    const str = stringify(json);
+    return "const clientId = '', token = '';" +
+    "\n\nrequire('node:https').request(" +
+    "`https://discord.com/api/applications/${clientId}/commands`" +
+    ",{method:'POST',headers:{'Content-Type':'application/json'," +
+    "Authorization:`BOT ${token}`," +
+    `'Content-Length':${byteLength(str)}}},` +
+    `r=>console.log('status:',r.statusCode)).end(${stringify(str)})`;
+  }
+  function validateNumber(text, intMode) {
+    const val = Number(text);
+    if (Number.isNaN(val)) return "INVALID";
+    if (val < MIN_SAFE_INTEGER) return "SMALL";
+    if (MAX_SAFE_INTEGER < val) return "BIG";
+    if (intMode && EPSILON < abs(trunc(val) - val)) {
+      return "TRUNC"; 
+    }
+    if (intMode && !/^-?\d+$/.test(text)) {
+      return "TRUNC"; 
+    }
+    return "OK";
+  }
+  
+
+  // Constants
+  const OPTION_TYPE = freeze([
+    /*NONE*/, /*"Sub command"*/, /*"Sub command group"*/,
+    "String", "Integer", "Boolean", "User", "Channel",
+    "Role", "Mentionable", "Number", "Attachment"
+  ].map((v, i) => [v, i]));
+  const CSS = freeze({
+    errorMessage: freeze({
+      color: "#FFA700"
+    }),
+    commandOption: freeze({
+      padding: "7px",
+      paddingTop: "0px",
+      border: "1px #222 solid",
+      borderRadius: "5px",
+      margin: "5px 0px",
+      position: "relative"
+    }),
+    optionChoice: freeze({
+      display: "felx",
+      padding: "5px 7px",
+      border: "1px #222 solid",
+      borderRadius: "5px",
+      margin: "5px 0px",
+      position: "relative"
+    }),
+    checkbox: freeze({
+      width: "24px",
+      height: "24px",
+      outline: "0",
+      cursor: "pointer"
+    }),
+    checkboxDescription: freeze({
+      marginLeft: ".3em",
+      "user-select": "none",
+      "-moz-user-select": "none",
+      "-ms-user-select": "none",
+      "-khtml-user-select": "none",
+      "-webkit-user-select": "none",
+      "-webkit-touch-callout": "none"
+    })
+  });
+
+
+  // Classes
+  const Events = (eventsMap => class {
+    constructor() {
+      eventsMap.set(this, new Map());
+    }
+    on(event, handler) {
+      const events = eventsMap.get(this);
+      const handlers = events.get(event);
+      if (handlers) handlers.push(handler);
+      else events.set(event, [handler]);
+    }
+    emit(event, ...args) {
+      eventsMap.get(this).get(event)?.forEach(f => f(...args));
+    }
+  })(new WeakMap());
+  freeze(Events.prototype);
+
+  const TextInput = (internalFieldsMap => class {
+    constructor({title, parent}) {
+      if (new.target !== TextInput) {
+        throw new Error("new.target is invalid");
+      }
+      const internal = {};
+      internalFieldsMap.set(this, internal);
+      const input = createElement("input");
+      input.type = "text";
+      const p = createElement("div");
+      appendElement(parent, p);
+      const titleElement = createElement("h3");
+      p.append(titleElement);
+      titleElement.textContent = title;
+      p.append(internal.input = input);
+      p.append(internal.errorMessage = createElement("div"));
+      assign(internal.errorMessage.style, CSS.errorMessage);
+    }
+    get value() {
+      return internalFieldsMap.get(this).input.value;
+    }
+    set value(value) {
+      internalFieldsMap.get(this).input.value = value;
+    }
+    on(...args) {
+      return internalFieldsMap.get(this).input.addEventListener(...args);
+    }
+    showError(text) {
+      const internal = internalFieldsMap.get(this);
+      internal.input.style.borderColor = "red";
+      internal.errorMessage.style.display = "";
+      internal.errorMessage.textContent = text;
+    }
+    hideError() {
+      const internal = internalFieldsMap.get(this);
+      internal.input.style.borderColor = "";
+      internal.errorMessage.style.display = "none";
+    }
+  })(new WeakMap());
+  freeze(TextInput.prototype);
+
+  const SelectorInput = (inputElementMap => class {
+    constructor({title, options, parent}) {
+      if (new.target !== SelectorInput) {
+        throw new Error("new.target is invalid");
+      }
+      const input = createElement("select");
+      inputElementMap.set(this, input);
+      options.forEach(value => {
+        const option = createElement("option");
+        [option.textContent, option.value] = value;
+        input.append(option);
+      });
+      input.style.cursor = "pointer";
+      const p = createElement("div");
+      appendElement(parent, p);
+      const titleElement = createElement("h3");
+      p.append(titleElement);
+      titleElement.textContent = title;
+      p.append(input);
+    }
+    get value() {
+      return inputElementMap.get(this).value;
+    }
+    set value(value) {
+      inputElementMap.get(this).value = value;
+    }
+    on(...args) {
+      return inputElementMap.get(this).addEventListener(...args);
+    }
+  })(new WeakMap());
+  freeze(SelectorInput.prototype);
+
+  const CheckboxInput = (inputElementMap => class {
+    constructor({title, description, parent}) {
+      if (new.target !== CheckboxInput) {
+        throw new Error("new.target is invalid");
+      }
+      const p = createElement("div");
+      appendElement(parent, p);
+      const titleElement = createElement("h3");
+      p.append(titleElement);
+      titleElement.textContent = title;
+      const checkboxContainer = createElement("div");
+      p.append(checkboxContainer);
+      const input = createElement("input");
+      inputElementMap.set(this, input);
+      checkboxContainer.append(input);
+      checkboxContainer.style.cursor = "pointer";
+      checkboxContainer.addEventListener("click", event => {
+        if (event.target !== input) input.click();
+      });
+      input.type = "checkbox";
+      assign(input.style, CSS.checkbox);
+      const descriptionElement = createElement("span");
+      descriptionElement.textContent = description;
+      assign(descriptionElement.style, CSS.checkboxDescription);
+      checkboxContainer.append(descriptionElement);
+    }
+    get value() {
+      return inputElementMap.get(this).checked;
+    }
+    set value(value) {
+      inputElementMap.get(this).checked = value;
+    }
+    on(...args) {
+      return inputElementMap.get(this).addEventListener(...args);
+    }
+  })(new WeakMap());
+  freeze(CheckboxInput.prototype);
+
+  const OptionChoice = (internalFieldsMap => class {
+    constructor({parent}) {
+      if (new.target !== OptionChoice) {
+        throw new Error("new.target is invalid");
+      }
+      const internal = {};
+      internalFieldsMap.set(this, internal);
+
+      const p = createElement("div");
+      const nc = createElement("div");
+      const cCSS = {
+        flex: "1",
+        padding: "2px"
+      };
+      Object.assign(nc.style, cCSS);
+      p.append(nc);
+      const ncTitle = createElement("h3");
+      ncTitle.textContent = "Name";
+      ncTitle.style.margin = "2px 0px";
+      nc.append(ncTitle);
+      nc.append(internal.name = createElement("input"));
+      internal.name.type = "text";
+      const vc = createElement("div");
+      Object.assign(vc.style, cCSS);
+      p.append(vc);
+      const vcTitle = createElement("h3");
+      vcTitle.textContent = "Value";
+      vcTitle.style.margin = "2px 0px";
+      vc.append(vcTitle);
+      vc.append(internal.value = createElement("input"));
+      internal.value.type = "text";
+      Object.assign(p.style, CSS.optionChoice);
+      appendElement(parent, p);
+    }
+    get name() {
+      return internalFieldsMap.get(this).name.value;
+    }
+    set name(value) {
+      internalFieldsMap.get(this).name.value = value;
+    }
+    get value() {
+      return internalFieldsMap.get(this).value.value;
+    }
+    set value(value) {
+      internalFieldsMap.get(this).value.value = value;
+    }
+  })(new WeakMap());
+  freeze(OptionChoice.prototype);
+
+  const CommandOption = (internalFieldsMap => class extends Events {
+    constructor({parent}) {
+      if (new.target !== CommandOption) {
+        throw new Error("new.target is invalid");
+      }
+
+      super();
+      const internal = {};
+      internalFieldsMap.set(this, internal);
+
+      const container = internal.container = createElement("div");
+      appendElement(parent, container)
+      assign(container.style, CSS.commandOption);
+      this.type = new SelectorInput({
+        title: "Type",
+        options: OPTION_TYPE,
+        parent: container
+      });
+
+      this.name = new TextInput({
+        title: "Name",
+        parent: container
+      });
+
+      this.description = new TextInput({
+        title: "Description",
+        parent: container
+      });
+
+      this.required = new CheckboxInput({
+        title: "Required",
+        description: "This command option is required",
+        parent: container
+      });
+
+      container.append(internal.autocomplete = createElement("div"));
+      this.autocomplete = new SelectorInput({
+        title: "Auto complete or Choices",
+        options: [
+          ["OFF", "false"],
+          ["ON - Auto complete", "true"],
+          //["ON - Choices", "choices"]
+        ],
+        parent: internal.autocomplete
+      });
+
+      container.append(internal.numOpt = createElement("div"));
+      internal.numOpt.style.display = "none";
+      this.minValue = new TextInput({
+        title: "Min value (optional)",
+        parent: internal.numOpt
+      });
+      this.maxValue = new TextInput({
+        title: "Max value (optional)",
+        parent: internal.numOpt
+      });
+
+      internal.choices = {};
+      internal.channelTypes = createElement("input");
+
+      const button = createElement("div");
+      button.innerHTML = "&times;";
+      button.className = "red-button";
+      container.append(button);
+      button.addEventListener("click", () => this.emit("deletionRequested"));
+
+      const {
+        type, name, description,
+        minValue, maxValue
+      } = this;
+
+      type.on("input", () => {
+        const optionType = Number(type.value);
+        this.numberRangeDisabled = ![ 4, 10 ].includes(optionType)
+        this.autocompleteDisabled = ![ 3, 4, 10 ].includes(optionType);
+        this.emit("changed");
+      });
+      function nameChecker() {
+        if (name.value.length < 1) {
+          return name.showError("This is required");
+        }
+        if (32 < name.value.length) {
+          return name.showError("Too long");
+        }
+        if (!/^[\w-]{1,32}$/.test(name.value)) {
+          return name.showError("Only alphabet, number, hyphen and underbar");
+        }
+        name.hideError();
+      }
+      name.on("blur", nameChecker);
+      name.on("input", () => {
+        nameChecker();
+        this.emit("changed");
+      });
+      function descriptionChecker() {
+        const length = countString(description.value);
+        if (length < 1) {
+          return description.showError("This is required");
+        }
+        if (100 < length) {
+          return description.showError("Too long");
+        }
+        description.hideError();
+      }
+      description.on("blur", descriptionChecker);
+      description.on("input", () => {
+        descriptionChecker();
+        this.emit("changed");
+      });
+
+      function numHandler(element) {
+        let tmp = "";
+        element.on("input", () => {
+          if (!element.value) {
+            tmp = element.value;
+            this.emit("changed");
+            return;
+          }
+          const optionType = Number(type.value);
+          if (![4, 10].includes(optionType)) {
+            element.value = tmp;
+            return;
+          }
+          const isInt = optionType === 4;
+          if (isInt ? element.value === "-" : /^(-|\.|-\.)$/.test(element.value)) {
+            tmp = element.value;
+            this.emit("changed");
+            return;
+          }
+          const sufdot = element.value.endsWith(".");
+          switch (validateNumber(element.value, isInt)) {
+            case "INVALID":
+              element.value = tmp;
+              return;
+            case "SMALL":
+              element.value = MIN_SAFE_INTEGER;
+              break;
+            case "BIG":
+              element.value = MAX_SAFE_INTEGER;
+              break;
+            case "TRUNC":
+              element.value = trunc(element.value);
+              if (sufdot && !isInt) element.value += ".";
+              break;
+            case "OK":
+              break;
+            default:
+              throw new Error("Invalid case");
+          }
+          tmp = element.value;
+          this.emit("changed");
+        });
+      }
+      numHandler(minValue);
+      numHandler(maxValue);
+      
+      this.required.on("input", () => {
+        this.emit("changed");
+      });
+      
+      this.autocomplete.on("input", () => {
+        this.emit("changed");
+      });
+
+      freeze(this);
+    }
+    get numberRangeDisabled() {
+      return internalFieldsMap.get(this).numOpt.style.display === "none";
+    }
+    set numberRangeDisabled(value) {
+      internalFieldsMap.get(this).numOpt.style.display = value ? "none" : "";
+    }
+    get autocompleteDisabled() {
+      return internalFieldsMap.get(this).autocomplete.style.display === "none";
+    }
+    set autocompleteDisabled(value) {
+      internalFieldsMap.get(this).autocomplete.style.display = value ? "none" : "";
+    }
+    deleteSelf() {
+      const { container } = internalFieldsMap.get(this);
+      container.parentNode?.removeChild(container);
+      internalFieldsMap.delete(this);
+    }
+    toJSON() {
+      const type = Number(this.type.value);
+      const isNum = [4, 10].includes(type);
+      const isAutocompletable = [3, 4, 10].includes(type);
+      return {
+        type,
+        name: this.name.value,
+        description: this.description.value,
+        required: this.required.value || void 0,
+        min_value: (() => {
+          if (!isNum || !this.minValue.value) return;
+          const num = Number(this.minValue.value);
+          if (Number.isNaN(num)) return;
+          return num;
+        })(),
+        max_value: (() => {
+          if (!isNum || !this.maxValue.value) return;
+          const num = Number(this.maxValue.value);
+          if (Number.isNaN(num)) return;
+          return num;
+        })(),
+        autocomplete: isAutocompletable && this.autocomplete.value === "true" || void 0
+      };
+    }
+  })(new WeakMap());
+  freeze(CommandOption.prototype);
+
+  const CommandOptionArray = (internalArrayMap => class extends Events {
+    constructor({ parent }) {
+      super();
+
+      const internal = [];
+      internalArrayMap.set(this, internal);
+      const container = createElement("div");
+      const options = createElement("div");
+      const addOptionButton = createElement("span");
+      addOptionButton.textContent = "Add command option";
+      addOptionButton.className = "add-option";
+      container.append(options);
+      container.append(addOptionButton);
+      appendElement(parent, container);
+
+      addOptionButton.addEventListener("click", () => {
+        const option = new CommandOption({ parent: options });
+        const { required } = option;
+        internal.push(option);
+        required.on("input", () => {
+          const index = internal.indexOf(option);
+          if (~index) {
+            if (required.value) {
+              internal.slice(0, index).forEach(o => o.required.value = true);
+            } else {
+              internal.slice(index + 1).forEach(o => o.required.value = false);
+            }
+          }
+          this.emit("changed");
+        });
+        option.on("deletionRequested", () => {
+          const index = internal.indexOf(option);
+          if (~index) internal.splice(index, 1);
+          option.deleteSelf();
+          if (internal.length < 10) {
+            addOptionButton.style.display = "";
+          }
+          this.emit("changed");
+        });
+        option.on("changed", () => this.emit("changed"));
+        if (9 < internal.length) {
+          addOptionButton.style.display = "none";
+        }
+        this.emit("changed");
+      });
+    }
+    at(index) {
+      return internalArrayMap.get(this).at(index);
+    }
+    get length() {
+      return internalArrayMap.get(this).length;
+    }
+    *[Symbol.iterator]() {
+      for (const e of internalArrayMap.get(this)) yield e;
+    }
+    toJSON() {
+      const internal = internalArrayMap.get(this);
+      if (internal.length) return internal.map(e => e?.toJSON?.());
+    }
+  })(new WeakMap());
+  freeze(CommandOptionArray.prototype);
+  Object.defineProperty(CommandOptionArray, Symbol.species, { value: Array });
+
+  (() => {
+    // Elements
+    const commandName = getElementById("name");
+    const commandDescription = getElementById("description");
+
+
+    // Write JSON Data
+    const flush = (out => () => out.textContent = toJS({
+      name: commandName.value,
+      description: commandDescription.value,
+      options: commandJSONOptions
+    }))(getElementById("out"));
+
+
+    // Main
+    document.addEventListener("click", () => {});
+
+
+    do {
+      const commandNameError = getElementById("name-error");
+      function commandNameChecker() {
+        flush();
+        if (commandName.value.length < 1) {
+          commandName.style.borderColor = "red";
+          commandNameError.style.display = "";
+          return commandNameError.textContent = "This is required";
+        }
+        if (32 < commandName.value.length) {
+          commandName.style.borderColor = "red";
+          commandNameError.style.display = "";
+          return commandNameError.textContent = "Too long";
+        }
+        if (!/^[\w-]{1,32}$/.test(commandName.value)) {
+          commandName.style.borderColor = "red";
+          commandNameError.style.display = "";
+          return commandNameError.textContent = "Only alphabet, number, hyphen and underbar";
+        }
+        commandNameError.style.display = "none";
+        return commandName.style.borderColor = "";
+      }
+      commandName.addEventListener("blur", commandNameChecker);
+      commandName.addEventListener("input", commandNameChecker);
+    } while(0);
+
+    do {
+      const commandDescriptionError = getElementById("description-error");
+      function commandDescriptionChecker() {
+        const length = countString(commandDescription.value);
+        flush();
+        if (length < 1) {
+          commandDescription.style.borderColor = "red";
+          commandDescriptionError.style.display = "";
+          return commandDescriptionError.textContent = "This is required";
+        }
+        if (100 < length) {
+          commandDescription.style.borderColor = "red";
+          commandDescriptionError.style.display = "";
+          return commandDescriptionError.textContent = "Too long";
+        }
+        commandDescriptionError.style.display = "none";
+        return commandDescription.style.borderColor = "";
+      }
+      commandDescription.addEventListener("blur", commandDescriptionChecker);
+      commandDescription.addEventListener("input", commandDescriptionChecker);
+    } while(0);
+
+    const commandJSONOptions = globalThis.commandJSONOptions = new CommandOptionArray({ parent: getElementById("options") });
+    commandJSONOptions.on("changed", flush);
+    flush();
+  })();
+})();
